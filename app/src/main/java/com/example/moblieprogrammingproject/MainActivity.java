@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
-    DBconnection db = new DBconnection(this);
     ListView listView;
     EditText id,name;
     DBHelper db2;
@@ -66,6 +66,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+    public  void GoToBook(View view){
+
+        Toast.makeText(this,"Testing101",Toast.LENGTH_LONG).show();
+
+        Intent i = new Intent(this, Main2Activity.class);
+//        if( TextUtils.isEmpty(editName.getText())){
+//
+//            editName.setError( "Name is required!" );}
+//        else{
+        String message="sir";
+//                            editName.getText().toString();
+        i.putExtra("personName", message);
+        startActivity(i);
+//        }
+    }
 
 
     @Override
@@ -98,20 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void save(View view) {
 
-
-        db.insertUser(Integer.parseInt(id.getText().toString()),name.getText().toString());
-
-
-    }
-
-
-    public void list(View view) {
-        ArrayList<String> res = db.getUsers();
-        listView.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,res));
-
-    }
 
 }
 
